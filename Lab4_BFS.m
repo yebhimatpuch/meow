@@ -1,17 +1,10 @@
-%% Requires 
-% Basic Solution set 
-% Basic feasable solution set 
-% optimal Solution 
-% Optimal Value 
-
 %% Ques Max z = 6*x1 + 5*x2
 % st -> x1 + x2 <= 5
 % -> 3*x1 + 2*x2 <= 12
 % -> x1 * x2 >= 0
 
-% Writing this in standard form -> Introducing slack variables for inequalities
 % Maximize z = 6*x1 + 5*x2
-% Subject to: (Taking Slack as X for easier syntax of the code)
+% Subject to: 
 % x1 + x2 + x3 = 5
 % 3*x1 + 2*x2 + x4 = 12
 % x1, x2, s3, x4 >= 0
@@ -25,8 +18,8 @@ clear figure;
 
 C = [6 5 0 0];
 A = [1 1 1 0;
-    3 2 0 1]; % Coefficients for the constraints
-b = [5; 12]; % Right-hand side values for the constraints
+    3 2 0 1]; 
+b = [5; 12]; 
 
 z = @(X) C*X;
 
@@ -36,8 +29,8 @@ n = size(A, 2); % Number of variables
 %% Phase 2, Finding Basic Solution set and basic feasable set 
 basicsol = [];
 bfsol = [];
-ncm = nchoosek(n, m); % This will give you combination value
-pair = nchoosek(1:n, m); % This will give pairs, like pairs of 2 variables for this case 
+ncm = nchoosek(n, m); 
+pair = nchoosek(1:n, m); 
 
 for i = 1:ncm
     basicvar_index = pair(i, :);
@@ -59,4 +52,5 @@ cost = z(bfsol);
 [opt_val index] = max(cost);
 optsol = bfsol(: , index);
 disp('Optimal Solution:');
+
 disp(optsol);
